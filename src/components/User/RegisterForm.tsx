@@ -1,36 +1,29 @@
-// components/RegisterForm.tsx
+// import React from 'react';
+// import { Form, Input, Button } from 'antd';
+// import { useForm } from 'react-hook-form';
+// import { useDispatch } from 'react-redux';
+// import { registerAsync } from '../../store/authSlice';
 
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { registerAsync } from '../../features/auth/authSlice';
+// const RegisterForm: React.FC = () => {
+//   const { handleSubmit, register } = useForm();
+//   const dispatch = useDispatch();
 
-interface RegisterFormProps {}
+//   const onSubmit = (data: any) => {
+//     dispatch((data));
+//   };
 
-interface RegisterFormData {
-  email: string;
-  fullName: string;
-  urlImage: string;
-  password: string;
-}
+//   return (
+//     <Form onFinish={handleSubmit(onSubmit)}>
+//       {/*... Rest of your register form */}
+//     </Form>
+//   );
+// };
 
-const RegisterForm: React.FC<RegisterFormProps> = () => {
-  const { register, handleSubmit } = useForm<RegisterFormData>();
-  const dispatch = useDispatch();
+// export default RegisterForm;
+import React from 'react'
 
-  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
-    dispatch(registerAsync(data));
-  };
-
+export const RegisterForm = () => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('email', { required: true })} placeholder="Email" />
-      <input {...register('fullName', { required: true })} placeholder="Full Name" />
-      <input {...register('urlImage', { required: true })} placeholder="Image URL" />
-      <input {...register('password', { required: true })} type="password" placeholder="Password" />
-      <button type="submit">Register</button>
-    </form>
-  );
-};
-
-export default RegisterForm;
+    <div>RegisterForm</div>
+  )
+}

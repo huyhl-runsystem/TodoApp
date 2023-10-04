@@ -1,47 +1,66 @@
-// components/LoginForm.tsx
-
 import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Form, Input, Button } from 'antd';
 import { useDispatch } from 'react-redux';
-import { loginAsync } from '../../features/auth/authSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
+import { SignIn, UserLogin } from '../../store/authSlice';
+import { ThunkDispatch } from 'redux-thunk';
 
-interface LoginFormProps {}
+const Login = () => {
+  const { control, handleSubmit } = useForm<UserLogin>(
+    {
+      defaultValues: {
+        email: '',
+        password: ''
+      }
+    }    
+  );
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
-interface LoginFormData {
-  email: string;
-  password: string;
-}
-
-const LoginForm: React.FC<LoginFormProps> = () => {
-  const { register, handleSubmit } = useForm<LoginFormData>();
-  const dispatch = useDispatch();
-
-  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    try {
-      dispatch(loginAsync(data))
-        .then(unwrapResult)
-        .then((user) => {
-          // Handle the user if needed
-          console.log('Logged in user:', user);
-        })
-        .catch((error: Error) => {
-          // Explicitly specify the type of the 'error' parameter
-          console.error('Login failed:', error.message);
-        });
-    } catch (error) {
-      // Handle other errors
-      console.error('Login failed:', error);
+  const onSubmit: SubmitHandler<UserLogin> = (data) => {
+    if (data) {
+      dispatch(SignIn(data));
     }
   };
-
+  // const onSubmit = (data: any) => {
+  //   console.log(data);
+  //   dispatch(loginAsync(data));
+  // };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('email', { required: true })} placeholder="Email" />
-      <input {...register('password', { required: true })} type="password" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Form onFinish={handleSubmit(onSubmit)}>
+        <Form.Item label="Email">
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: 'Email is required', pattern: /^\S+@\S+$/i }}
+            render={({ field, fieldState }) => (
+              <>
+                <Input {...field} placeholder="Enter your email" />
+                {fieldState?.error && <p style={{ color: 'red' }}>{fieldState.error.message}</p>}
+              </>
+            )}
+          />
+        </Form.Item>
+
+        <Form.Item label="Password">
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: 'Password is required', minLength: 6 }}
+            render={({ field, fieldState }) => (
+              <>
+                <Input.Password {...field} placeholder="Enter your password" />
+                {fieldState?.error && <p style={{ color: 'red' }}>{fieldState.error.message}</p>}
+              </>
+            )}
+          />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          Login
+        </Button>
+      </Form>
+    </div>
   );
 };
 
-export default LoginForm;
+export default Login;
