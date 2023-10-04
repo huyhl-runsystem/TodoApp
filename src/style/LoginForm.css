@@ -1,0 +1,46 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 40px 40px 40px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .title-login {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: rgb(75, 170, 202);
+    font-family: Impact, "Arial Narrow Bold", sans-serif;
+  }
+  
+  .forgot-password {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 auto;
+  }
+  .create-account {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  .create-account-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .create-account-link:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 650px) {
+    .login-container {
+      max-width: 90%;
+    }
+  }

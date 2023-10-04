@@ -1,11 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from "axios";
 
-const fetchData = async () => {
-  try {
-    const response = await axios.get('https://todoapp-uit.vercel.app/api-docs/');
-    console.log(response.data); 
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
+const axiosInstance : AxiosInstance = axios.create({
+  baseURL: "https://todoapp-uit.vercel.app/",
+  timeout: 2000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export default axiosInstance;
 
