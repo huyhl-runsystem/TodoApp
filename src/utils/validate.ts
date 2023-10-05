@@ -1,13 +1,5 @@
 import * as yup from "yup";
-
-export const rules = {
-    lengthPassword: "Độ dài từ 8 - 16 ký tự",
-    requiredPassword: "Password là bắt buộc",
-    requiredEmail: "Email là bắt buộc",
-    formatEmail: "Email không đúng định dạng",
-    requiredFullname: "Fullname là bắt buộc",
-    requiredImage: "Ảnh là bắt buộc",
-  };
+import {rules} from "./rules";
 
 export const validate = yup.object({
   email: yup.string().required(rules.requiredPassword).email(rules.formatEmail),

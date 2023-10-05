@@ -4,7 +4,7 @@ import LoginForm from './pages/Login/LoginForm';
 const App = () => {
   return (
     <div>
-      <h1>Your App</h1>
+      <h1>TodoList App</h1>
       <LoginForm />
     </div>
   );

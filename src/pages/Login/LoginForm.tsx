@@ -34,9 +34,9 @@ export default function Login() {
 
   return (
     <div className="container">
-      <h1> Hello</h1>
+      {/* <h1> Hello </h1> */}
       <Form id="login" onFinish={handleSubmit(onSubmit)} className="login-form">
-        <div className="title-login">{t("TileLogin")}</div>
+        <div className="title-login">{t("Sign In")}</div>
         <FormControl
           errors={errors.email}
           // control={control}
@@ -44,7 +44,6 @@ export default function Login() {
           name="email"
           // placeholder={"Email"}
         >
-          <h1>2</h1>
           <Controller
             name="email"
             control={control}
@@ -58,7 +57,6 @@ export default function Login() {
           name="password"
           // placeholder={"Password"}
         > 
-          <h2>3</h2>
           <Controller
             name="password"
             control={control}
@@ -72,7 +70,7 @@ export default function Login() {
             htmlType="submit"
             className="login-form-button"
           >
-            {t("TileLogin")}
+            {t("Login")}
           </Button>
         </Form.Item>
 
