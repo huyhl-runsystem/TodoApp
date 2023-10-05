@@ -1,3 +1,5 @@
+import React  from 'react';
+import "../../style/LanguageSwitch.css";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";
 const { Option } = Select;
@@ -17,7 +19,6 @@ const LanguageSwitch = () => {
         onChange={changeLanguage}
       >
         <Option value="en"> English </Option>
-        <Option value="jp"> 日本語 </Option>
         <Option value="vi"> Vietnamese </Option>
       </Select>
     </div>

@@ -1,0 +1,12 @@
+.custom-header-sidebar {
+    padding: 0;
+    color: aquamarine;
+    background: aquamarine;
+  }
+  
+  .custom-content-sidebar {
+    padding: 24px;
+    min-height: 360px;
+    background: rgb(215, 202, 202);
+  }
+  

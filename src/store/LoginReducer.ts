@@ -6,12 +6,17 @@ import {
   getRefreshTokenFromCookie,
   setAccessTokenCookie,
   setRefreshTokenToCookie,
-} from "./refresh_token";
+} from "../utils/refresh_token";
 import { IAuth } from "../interfaces/IAuth";
 import axiosInstance from "../api/axios";
 import { IUserLogin } from "../interfaces/IUserLogin";
 
-const initialState: IAuth = {
+
+interface IStateAuth extends IAuth {
+  isLoading?: boolean;
+}
+
+const initialState: IStateAuth = {
   success: false,
   data: {
     user: {
@@ -28,6 +33,7 @@ const initialState: IAuth = {
   },
   message: "",
   status: 0,
+  isLoading: false,
 };
 
 export const loginAsync = createAsyncThunk(
@@ -35,8 +41,7 @@ export const loginAsync = createAsyncThunk(
   async (body: IUserLogin, { rejectWithValue }) => {
     try {
       const response: AxiosResponse<IAuth> =
-        await axiosInstance.post<IAuth>("/api/auth/login", body);
-
+        await axiosInstance.post<IStateAuth>("/auth/login", body);
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -50,7 +55,7 @@ export const refreshAccessTokenAsync = createAsyncThunk<
 >("auth/refreshAccessToken", async (payload, thunkAPI) => {
   try {
     const response: AxiosResponse<IAuth> = await axiosInstance.post(
-      "/api/auth/refresh-token",
+      "/auth/refresh-token",
       { refresh_token: payload.refresh_token }
     );
     return response;
@@ -69,18 +74,30 @@ const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
+      .addCase(loginAsync.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(loginAsync.fulfilled, (state, action) => {
+        const { access_token, refresh_token, user } = action.payload.data.data;
+        state.isLoading = false;
         state.data.access_token = action.payload.data.data.access_token;
         setAccessTokenCookie(action.payload.data.data.access_token, 1);
         setRefreshTokenToCookie(action.payload.data.data.refresh_token);
         state.data.user = action.payload.data.data.user as IUser;
       })
+      .addCase(loginAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.error.message as string;
+      })
       .addCase(refreshAccessTokenAsync.fulfilled, (state, action) => {
+        const { access_token, refresh_token } = action.payload.data.data;
         setAccessTokenCookie(action.payload.data.data.access_token, 1);
         setRefreshTokenToCookie(action.payload.data.data.refresh_token);
         state.data.access_token = action.payload.data.data.access_token;
         state.data.refresh_token = action.payload.data.data.refresh_token;
+      })
+      .addCase(refreshAccessTokenAsync.rejected, (state, action) => {
+        state.message = action.error.message as string;
       });
   },
 });

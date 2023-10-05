@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 export const rules = {
-    lengthPassword: "Độ dài ít nhất là 6 kí tự ",
-    requiredPassword: "Password required",
+    lengthPassword: "Minimum length is 6 characters ",
     requiredEmail: "Email required",
-    formatEmail: "Email không đúng định dạng",
+    requiredPassword: "Password required",
+    formatEmail: "Email invalidate",
     requiredFullname: "Fullname required",
     requiredImage: "Image required",
   };

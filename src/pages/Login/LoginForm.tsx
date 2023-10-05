@@ -1,26 +1,23 @@
-import "../../style/LoginForm.css";
 import React  from 'react';
+import "../../style/LoginForm.css";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { validate } from "../../utils/validate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { loginAsync } from "../../store/reducer";
+import { loginAsync } from "../../store/LoginReducer";
 import { AppDispatch } from "../../store/store";
 import { Button, Form, Input } from "antd";
 import { path } from "../../api/routes";
 import { useTranslation } from "react-i18next";
-import FormControl from "../../components/FormControl/FormControl";
+import FormControl from "../../components/Common/FormControl";
 import { IUserLogin } from "../../interfaces/IUserLogin";
 
 const loginValidate = validate.pick(["email", "password"]);
 export default function Login() {
   const { t } = useTranslation();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
+  const { control, handleSubmit, formState: { errors },
   } = useForm({
     resolver: yupResolver(loginValidate),
   });
@@ -34,15 +31,11 @@ export default function Login() {
 
   return (
     <div className="container">
-      {/* <h1> Hello </h1> */}
       <Form id="login" onFinish={handleSubmit(onSubmit)} className="login-form">
         <div className="title-login">{t("Sign In")}</div>
         <FormControl
           errors={errors.email}
-          // control={control}
-          // prefix={<UserOutlined className="site-form-item-icon" />}
           name="email"
-          // placeholder={"Email"}
         >
           <Controller
             name="email"
@@ -52,10 +45,7 @@ export default function Login() {
         </FormControl>
         <FormControl
           errors={errors.password}
-          // control={control}
-          // prefix={<LockOutlined className="site-form-item-icon" />}
           name="password"
-          // placeholder={"Password"}
         > 
           <Controller
             name="password"
