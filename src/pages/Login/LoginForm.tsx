@@ -14,9 +14,7 @@ import { useTranslation } from "react-i18next";
 import FormControl from "../../components/Common/FormControl";
 import { IUserLogin } from "../../interfaces/IUserLogin";
 import InputController from "../../components/Common/InputControl";
-// import { useNavigate } from "react-router-dom";
 
-// const navigate = useNavigate();
 
 const loginValidate = validate.pick(["email", "password"]);
 export default function Login() {
@@ -35,7 +33,9 @@ export default function Login() {
 
   return (
     <div className="container">
-      <Form id="login" onFinish={handleSubmit(onSubmit)} className="login-form">
+      <Form id="login" 
+      onFinish={handleSubmit(onSubmit)} 
+      className="login-form">
         <div className="title-login">{t("Sign In")}</div>
         <FormControl errors={errors.email} name="email">
           <InputController
@@ -62,6 +62,7 @@ export default function Login() {
             htmlType="submit"
             className="login-form-button"
           >
+            
             <Link to={path.todoListPath} className="create-account-link">
             {t("Login")}
             </Link>

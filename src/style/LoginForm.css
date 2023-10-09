@@ -29,8 +29,3 @@
   .create-account-link:hover {
     text-decoration: underline;
   }
-  /* @media (max-width: 650px) {
-    .login-container {
-      max-width: 90%;
-    }
-  } */

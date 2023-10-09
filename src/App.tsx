@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import RouteElement from "./hook/RouteElement";
+import RouteElement from "./routes/RouteElement";
 import { AppDispatch, RootState } from "./store/store";
 import { useEffect } from "react";
 import { refreshAccessTokenAsync } from "./store/LoginReducer";
@@ -14,12 +14,14 @@ function App() {
   );
 
   useEffect(() => {
-    async function refreshAccessToken() {
-      await dispatch(refreshAccessTokenAsync({ refresh_token: refreshToken }));
-    }
-    if (refreshToken) {
-      refreshAccessToken();
-    }
+    const refreshAccessToken = () => {
+      if (refreshToken) {
+        dispatch(refreshAccessTokenAsync({ refresh_token: refreshToken }));
+      }
+    };
+    // if (refreshToken) {
+    //   refreshAccessToken();
+    // }
 
     const intervalId = setInterval(refreshAccessToken, 10 * 60 * 1000);
 

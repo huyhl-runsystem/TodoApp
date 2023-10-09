@@ -1,23 +1,23 @@
 import React from "react";
-import { Navigate, Outlet, useRoutes } from "react-router-dom";
+import { Route, Routes, useRoutes } from "react-router-dom";
 import LoginForm from "../pages/Login/LoginForm";
 import { path } from "../api/routes";
-import { getFromCookie } from "../utils/refresh_token";
-import RegisterForm from "../pages/Register/RegisterForm";
-import Todo from "../pages/TaskPage/Todo";
 
-export default function RouteElements() {
-  const accessToken = getFromCookie("access_token");
-  const isPrivate = Boolean(accessToken);
-  console.log(isPrivate);
-  const isPublic = Boolean(accessToken);
+import RegisterForm from "../pages/Register/RegisterForm";
+import Home from "../pages/Common/Home";
+import TodoList from "../pages/TaskPage/Todo";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+
+export default function useRouteElements() {
 
   const routeElements = useRoutes([
-   {
+    {
       path: "",
-      element: isPrivate ?  <Outlet /> : <LoginForm />,
+      element: <PublicRoute />,
       children: [
         {
+          index : true,
           path: path.loginPath,
           element: <LoginForm />,
         },
@@ -29,16 +29,18 @@ export default function RouteElements() {
     },
     {
       path: "",
-      element: !isPrivate ? <Navigate to="/todolist" /> : <Outlet />,
+      element: <PrivateRoute />,
       children: [
         {
+          path: path.homepagePath,
+          element: <Home />,
+        },
+        {
           path: path.todoListPath,
-          element: isPrivate ? <Todo /> : null,
+          element: <TodoList />,
         },
       ],
     },
-
   ]);
-
   return routeElements;
 }

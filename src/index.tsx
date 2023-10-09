@@ -6,8 +6,7 @@ import { store } from "../src/store/store";
 import { BrowserRouter } from 'react-router-dom';
 import { LoadingProvider } from './Provider/LoadingProvider';
 import Loading from './hook/Loading'
-import Register from './pages/Register/RegisterForm';
-import Login from './pages/Login/LoginForm';
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

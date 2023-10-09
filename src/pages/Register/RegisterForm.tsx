@@ -95,15 +95,24 @@ export default function Register() {
               type="primary"
               className="register-form-button"
             >
+              <Link to={path.todoListPath} className="create-account-link">
               {t("Register")}
+              </Link>
             </Button>
           </Form.Item>
 
-          <div className="create-account">
-            {t("Back login page")}
-            <Link to={path.loginPath} className="create-account-link">
-            </Link>
-          </div>
+          <Form.Item>
+            <Button
+              form={$id}
+              htmlType="submit"
+              type="primary"
+              className="back-to-login-page"
+            >
+              <Link to={path.loginPath} className="create-account-link">
+              {t("Back to login page")}
+              </Link>
+            </Button>
+          </Form.Item>
         </Form>
       )}
     </div>
