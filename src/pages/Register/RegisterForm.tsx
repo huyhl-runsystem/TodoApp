@@ -15,7 +15,7 @@ import {
   registerAsync,
   setSuccessRegister,
 } from "../../store/RegisterReducer";
-import { useLoading } from "../../constants/Loading";
+import { useLoading } from "../../hook/Loading";
 
 interface FormState {
   email: string;
@@ -57,24 +57,16 @@ export default function Register() {
     }
   }, [isLoadingState, showLoading, hideLoading, isSuccess, navigate, dispatch]);
 
-  // useEffect(() => {
-  //   isLoadingState ? showLoading : hideLoading;
-  //   if (isLoadingState) {
-  //     navigate("/");
-  //     dispatch(setSuccessRegister());
-  //   }
-  // }, [isLoadingState, showLoading, hideLoading, isSuccess, navigate, dispatch]);
-
   return (
-    <div className="container">
+    <div className="register-container">
       {!isLoading && (
         <Form
           id={$id}
           onFinish={handleSubmit(onSubmit)}
-          className="login-register-form"
+          className="register-container "
           noValidate
         >
-          <div className="title-login-register">{t("TileRegister")}</div>
+          <div className="title-register">{t("Register")}</div>
 
           <InputControl
             placeholder="Fullname"
@@ -101,18 +93,16 @@ export default function Register() {
               form={$id}
               htmlType="submit"
               type="primary"
-              className="login-form-button"
+              className="register-form-button"
             >
-              {t("TileRegister")}
+              {t("Register")}
             </Button>
           </Form.Item>
 
           <div className="create-account">
-            <h2>Login now</h2>
-            {/* {t("LoginQuestion")} */}
-            {/* <Link to={path.loginPath} className="create-account-link">
-              {t("LoginNow")}
-            </Link> */}
+            {t("Back login page")}
+            <Link to={path.loginPath} className="create-account-link">
+            </Link>
           </div>
         </Form>
       )}

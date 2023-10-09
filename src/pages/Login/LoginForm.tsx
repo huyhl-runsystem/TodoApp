@@ -13,6 +13,10 @@ import { path } from "../../api/routes";
 import { useTranslation } from "react-i18next";
 import FormControl from "../../components/Common/FormControl";
 import { IUserLogin } from "../../interfaces/IUserLogin";
+import InputController from "../../components/Common/InputControl";
+// import { useNavigate } from "react-router-dom";
+
+// const navigate = useNavigate();
 
 const loginValidate = validate.pick(["email", "password"]);
 export default function Login() {
@@ -33,24 +37,22 @@ export default function Login() {
     <div className="container">
       <Form id="login" onFinish={handleSubmit(onSubmit)} className="login-form">
         <div className="title-login">{t("Sign In")}</div>
-        <FormControl
-          errors={errors.email}
-          name="email"
-        >
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => <Input placeholder="Email" {...field} />}
+        <FormControl errors={errors.email} name="email">
+          <InputController
+              name="email"
+              control={control}
+              placeholder="Email"
+              type="text"
+          
           />
         </FormControl>
-        <FormControl
-          errors={errors.password}
-          name="password"
-        > 
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => <Input placeholder="Password" {...field} />}
+
+        <FormControl errors={errors.password} name="password"> 
+          <InputController
+              name="password"
+              control={control}
+              placeholder="Password"
+              type="password"
           />
         </FormControl>
         <Form.Item>
@@ -60,15 +62,17 @@ export default function Login() {
             htmlType="submit"
             className="login-form-button"
           >
+            <Link to={path.todoListPath} className="create-account-link">
             {t("Login")}
+            </Link>
           </Button>
         </Form.Item>
 
         <div className="create-account">
-          {t("QuestionCreateAcount")}
-          {/* <Link to={path.registerPath} className="create-account-link">
-            {t("CreateAcount")}
-          </Link> */}
+          {t("Do not have an account?")}
+          <Link to={path.registerPath} className="create-account-link">
+          {t("Create new account")}
+          </Link>
         </div>
       </Form>
     </div>

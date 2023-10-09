@@ -6,7 +6,7 @@ import { clearAccessToken } from "../../store/LoginReducer";
 import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../Common/Sidebar";
 import { AppDispatch, RootState } from "../../store/store";
-import { useLoading } from "../../constants/Loading";
+import { useLoading } from "../../hook/Loading";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

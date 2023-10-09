@@ -1,5 +1,5 @@
 export const path = {
     loginPath: "/",
     todoListPath: "/todolist",
-    registerPath: "/user",
+    registerPath: "/register",
   } as const;

@@ -1,26 +1,32 @@
-.login-form {
+.register-container  {
     display: flex;
     flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 40px 40px 40px 40px;
-    max-width: 400px;
+    padding: 40px;
+    max-width: 200px;
     width: 100%;
     margin: 0 auto;
   }
   
-  .title-login {
+  .title-register {
     margin-bottom: 20px;
     font-size: 25px;
     color: rgb(75, 170, 202);
     font-family: Impact, "Arial Narrow Bold", sans-serif;
   }
+  
   .create-account {
     margin-top: 20px;
     text-align: center;
   }
+  
+  .create-account h2 {
+    font-size: 18px;
+  }
+  
   .create-account-link {
     color: #007bff;
     text-decoration: none;
@@ -29,8 +35,14 @@
   .create-account-link:hover {
     text-decoration: underline;
   }
-  /* @media (max-width: 650px) {
-    .login-container {
+  
+  .register-form-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 200px) {
+    .register-container {
       max-width: 90%;
     }
-  } */
+  }

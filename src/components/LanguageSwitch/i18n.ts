@@ -29,7 +29,7 @@ i18n.use(initReactI18next).init({
         Language: "Ngôn ngữ",
         TileLogin: "Đăng nhập",
         Password: "Mật khẩu",
-        QuestionCreateAcount: "Bạn không có tài khoản?",
+        QuestionCreateAcount: "Bạn chưa có tài khoản?",
         CreateAcount: "Tạo tài khoản mới",
       },
     },

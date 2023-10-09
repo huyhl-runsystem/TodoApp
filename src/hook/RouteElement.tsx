@@ -10,9 +10,10 @@ export default function RouteElements() {
   const accessToken = getFromCookie("access_token");
   const isPrivate = Boolean(accessToken);
   console.log(isPrivate);
+  const isPublic = Boolean(accessToken);
 
   const routeElements = useRoutes([
-    {
+   {
       path: "",
       element: isPrivate ?  <Outlet /> : <LoginForm />,
       children: [
@@ -36,6 +37,7 @@ export default function RouteElements() {
         },
       ],
     },
+
   ]);
 
   return routeElements;

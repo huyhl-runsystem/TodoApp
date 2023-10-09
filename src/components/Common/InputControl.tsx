@@ -9,24 +9,16 @@ const InputController:React.FC<IInputControl> = ({
   placeholder,
   errors,
   type,
+  onBlur,
 }) => {
   return (
-    <Form.Item
-      name={name}
-      hasFeedback
-      validateStatus={errors ? "error" : ""}
-      help={errors?.message}
-    >
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <Input
-            type={type} placeholder={placeholder} {...field}
-          />
+          <Input  type={type} placeholder={placeholder} {...field} />
         )}
       />
-    </Form.Item>
   );
 };
 

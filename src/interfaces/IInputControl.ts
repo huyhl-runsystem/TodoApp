@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { FieldError } from "react-hook-form";
+import { ReactNode, ReactElement   } from "react";
+import { FieldError, FieldValues } from "react-hook-form";
 
 export interface IInputControl {
   errors?: FieldError;
@@ -8,4 +8,5 @@ export interface IInputControl {
   control: any;
   type?: string;
   prefix?: ReactNode;
+  onBlur? : (e: React.FocusEvent<HTMLInputElement>) => void;
 }
