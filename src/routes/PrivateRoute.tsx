@@ -7,6 +7,5 @@ export default function PrivateRoute() {
   const accessToken = getFromCookie("access_token");
   const isPrivate = Boolean(accessToken);
 
-  return isPrivate ? <Navigate to={path.loginPath} /> : <Outlet /> ;
+  return isPrivate ? <Outlet /> : <Navigate to={path.loginPath} />;
 }
-

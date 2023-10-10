@@ -10,7 +10,18 @@ export const useLoading = () => {
 
 export default function Loading({ children }: { children: React.ReactNode }) {
   const { isLoading } = useLoading();
-  return isLoading ? <Skeleton /> : <>{children}</>;
+  return (
+    <>
+      {!isLoading ? (
+        children
+      ) : (
+        <>
+          <Skeleton />
+          {children}
+        </>
+      )}
+    </>
+  );
 
 };
 

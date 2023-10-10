@@ -7,7 +7,7 @@ export const validate = yup.object({
     .string()
     .required(rules.requiredPassword)
     .min(6, rules.lengthPassword)
-    .max(160, rules.lengthPassword),
+    .max(20, rules.lengthPassword),
   full_name: yup.string().required("Fullname required"),
   url_img: yup.string().required("Image required"),
 });

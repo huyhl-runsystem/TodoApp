@@ -1,4 +1,5 @@
 import React  from 'react';
+import "../../style/RegisterForm.css"
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -16,6 +17,7 @@ import {
   setSuccessRegister,
 } from "../../store/RegisterReducer";
 import { useLoading } from "../../hook/Loading";
+import FormControl from '../../components/Common/FormControl';
 
 interface FormState {
   email: string;
@@ -63,30 +65,38 @@ export default function Register() {
         <Form
           id={$id}
           onFinish={handleSubmit(onSubmit)}
-          className="register-container "
+          className="register-form "
           noValidate
         >
           <div className="title-register">{t("Register")}</div>
 
+          <FormControl  name="full_name">
           <InputControl
             placeholder="Fullname"
             name="full_name"
             control={control}
             errors={errors.full_name}
           />
+          </FormControl>
+          
+          <FormControl errors={errors.email} name="email">
           <InputControl
             placeholder="Email"
             name="email"
             control={control}
             errors={errors.email}
           />
+          </FormControl>
 
+          <FormControl errors={errors.password} name="password">
           <InputControl
             placeholder="Password"
             name="password"
             control={control}
             errors={errors.password}
+            type="password"
           />
+          </FormControl>
 
           <Form.Item>
             <Button
@@ -95,9 +105,7 @@ export default function Register() {
               type="primary"
               className="register-form-button"
             >
-              <Link to={path.todoListPath} className="create-account-link">
               {t("Register")}
-              </Link>
             </Button>
           </Form.Item>
 
@@ -108,7 +116,7 @@ export default function Register() {
               type="primary"
               className="back-to-login-page"
             >
-              <Link to={path.loginPath} className="create-account-link">
+              <Link to={path.loginPath} className="back-to-login-page">
               {t("Back to login page")}
               </Link>
             </Button>

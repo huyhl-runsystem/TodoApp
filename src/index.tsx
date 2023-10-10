@@ -6,7 +6,7 @@ import { store } from "../src/store/store";
 import { BrowserRouter } from 'react-router-dom';
 import { LoadingProvider } from './Provider/LoadingProvider';
 import Loading from './hook/Loading'
-
+import LoginForm from './pages/Login/LoginForm';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Provider store={store}>
           <Loading>
             <App/>
+            {/* <LoginForm/> */}
           </Loading>
         </Provider>
       </LoadingProvider>

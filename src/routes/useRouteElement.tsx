@@ -17,7 +17,7 @@ export default function useRouteElements() {
       element: <PublicRoute />,
       children: [
         {
-          index : true,
+          index :true,
           path: path.loginPath,
           element: <LoginForm />,
         },
@@ -32,6 +32,7 @@ export default function useRouteElements() {
       element: <PrivateRoute />,
       children: [
         {
+          // index : true,
           path: path.homepagePath,
           element: <Home />,
         },
