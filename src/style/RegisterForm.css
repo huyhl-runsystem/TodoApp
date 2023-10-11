@@ -1,0 +1,33 @@
+.register-form  {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px 40px 40px 40px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .title-register {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: rgb(75, 170, 202);
+    font-family: Impact, "Arial Narrow Bold", sans-serif;
+  }
+  
+  .back-to-login-page:hover {
+    text-decoration: underline;
+  }
+  
+  .register-form-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .input-register{
+    margin: 10px;
+  }
+  
