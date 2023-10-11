@@ -30,7 +30,7 @@ const TodoList: React.FC = () => {
       <ul>
         {data.map((todo) => (
           <li key={todo._id}>
-            <strong>{todo.title}</strong>: {todo.desc}
+            <strong>{todo.title}</strong>: {todo.desc} :{todo.status}
           </li>
         ))}
       </ul>

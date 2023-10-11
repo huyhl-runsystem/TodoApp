@@ -20,6 +20,7 @@ export const registerAsync = createAsyncThunk<
         await axiosInstance.post("/users/",body);
     return response;
   } catch (error: any) {
+    alert(error.response.data.message);
     return thunkAPI.rejectWithValue(error);
   }
 });

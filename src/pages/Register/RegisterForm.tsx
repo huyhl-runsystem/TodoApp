@@ -38,11 +38,6 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormState>({
-    // defaultValues: {
-    //   email: "",
-    //   password: "",
-    //   full_name: "",
-    // },
     resolver: yupResolver(RegisterValidate),
   });
   const dispatch = useDispatch<AppDispatch>();

@@ -6,7 +6,6 @@ import { ITodoResponse } from "../interfaces/ITodoResponse";
 
 interface IStateTodo extends ITodoResponse{
     isLoading?: boolean;
-    accessToken? : string; 
 }
 
 const initialState : IStateTodo = {
