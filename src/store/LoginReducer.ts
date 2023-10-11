@@ -81,7 +81,6 @@ const loginSlice = createSlice({
         const { data } = action.payload.data;
         const { access_token, refresh_token} = action.payload.data.data;
         state.isLoading = false;
- 
         setAccessTokenCookie(access_token, 1);
         setRefreshTokenToCookie(refresh_token);
         state.data = data;

@@ -8,19 +8,27 @@ interface IStateTodo extends ITodoResponse{
     isLoading?: boolean;
 }
 
+enum TodoStatus {
+  Pending = 1,
+  Doing = 2,
+  Completed = 3,
+}
+
 const initialState : IStateTodo = {
     success : false,
-    data: [  {
+    data: {
+      to_dos:[  {
         _id: "",
         title: "",
         desc: "",
-        status: 1,
+        status: TodoStatus.Pending,
         user_id: "",
         createdAt: "",
         updatedAt: "",
         __v: 0,
     }],
-  
+      total: 0,
+  },
     message : "",
     status :0,
     isLoading : false,
