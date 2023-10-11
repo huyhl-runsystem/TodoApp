@@ -10,9 +10,9 @@ interface LoadingContextInterface {
 
 const initialLoadingContex: LoadingContextInterface = {
   isLoading: false,
-  setIsLoading: () => null,
-  showLoading: () => null,
-  hideLoading: () => null,
+  setIsLoading: () => {},
+  showLoading: () => {},
+  hideLoading: () => {},
 };
 
 export const LoadingContext =

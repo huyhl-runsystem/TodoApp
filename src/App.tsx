@@ -19,10 +19,7 @@ function App() {
         dispatch(refreshAccessTokenAsync({ refresh_token: refreshToken }));
       }
     };
-    // if (refreshToken) {
-    //   refreshAccessToken();
-    // }
-
+    
     const intervalId = setInterval(refreshAccessToken, 10 * 60 * 1000);
 
     return () => {

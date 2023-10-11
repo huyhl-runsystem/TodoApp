@@ -2,7 +2,7 @@ export const LocalStorageEventTarget = new EventTarget();
 
 const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
-const setCookie = (name : string , value : string , expires : Date, path = "/", domain = "") => {
+const setCookie = (name : string , value : string , expires : Date, path = "/login", domain = "") => {
   document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=${path}; domain=${domain}`;
 };
 
