@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Provider store={store}>
           <Loading>
             <App/>
-            {/* <LoginForm/> */}
           </Loading>
         </Provider>
       </LoadingProvider>

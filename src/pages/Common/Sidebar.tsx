@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children, ReactNode } from 'react';
 import { InfoCircleOutlined, FormOutlined, SnippetsOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
@@ -23,7 +23,7 @@ function getItem(
   } as MenuItem;
 }
 
-export default function SideBar() {
+export default function SideBar({children}:{children:ReactNode}) {
   const items: MenuItem[] = [
     getItem("Todo", "drop_list", <SnippetsOutlined  />, [
       getItem("Create Todo", "create_todo"),
@@ -48,7 +48,7 @@ export default function SideBar() {
       </Sider>
       <Layout>
         <Header className="header-sidebar">App Todo</Header>
-        <Content className="content-sidebar">Content</Content>
+        <Content className="content-sidebar">{children}</Content>
         <Footer className='footer-sidebar' style={{ textAlign: "center" }}>
           App Todo created by LeHuy
         </Footer>

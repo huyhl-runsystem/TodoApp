@@ -32,7 +32,6 @@ export default function useRouteElements() {
       element: <PrivateRoute />,
       children: [
         {
-          // index : true,
           path: path.homepagePath,
           element: <Home />,
         },

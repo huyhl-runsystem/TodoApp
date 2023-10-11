@@ -14,10 +14,17 @@ function App() {
   );
 
   useEffect(() => {
-    if (refreshToken) {
-      dispatch(refreshAccessTokenAsync({ refresh_token: refreshToken }));
-    }
-    const intervalId = setInterval(refreshAccessTokenAsync, 10 * 60 * 1000);
+    const refreshAccessToken = () => {
+      if (refreshToken) {
+        dispatch(refreshAccessTokenAsync({ refresh_token: refreshToken }));
+      }
+    };
+    // if (refreshToken) {
+    //   refreshAccessToken();
+    // }
+
+    const intervalId = setInterval(refreshAccessToken, 10 * 60 * 1000);
+
     return () => {
       clearInterval(intervalId);
     };

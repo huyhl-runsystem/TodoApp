@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useLoading } from "../../hook/Loading";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import TodoList from "./TodoList";
 
 export default function TodoPage() {
   const { isLoading: isLoadingState } = useSelector(
@@ -21,7 +22,7 @@ export default function TodoPage() {
   const handleLogOut = () => {
     clearAllCookies();
     dispatch(clearAccessToken());
-    navigate("/");
+    navigate("/login");
   };
   useEffect(() => {
     isLoadingState ? showLoading() : hideLoading();
@@ -32,7 +33,9 @@ export default function TodoPage() {
       {!isLoading && (
         <div className="todo-page">
           <Button onClick={handleLogOut}>Sign Out</Button>
-          <SideBar />
+          <SideBar>
+            <TodoList />
+          </SideBar>
         </div>
       )}
     </>

@@ -30,7 +30,6 @@ export default function Login() {
     if (data) {
       alert("Logined in successfully")
       dispatch(loginAsync(data));
-      hideLoading();
     }
   };
   const { showLoading, hideLoading, isLoading } = useLoading();

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import loginReducer from "./LoginReducer";
-import RegisterReducer from "./RegisterReducer";
+import registerReducer from "./RegisterReducer";
+import todoReducer from "./TodoReducer";
 export const store = configureStore({
   reducer: {
     login: loginReducer,
-    register: RegisterReducer,
+    register: registerReducer,
+    todo : todoReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

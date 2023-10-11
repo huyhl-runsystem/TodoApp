@@ -78,12 +78,13 @@ const loginSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
-        const { access_token, refresh_token, user } = action.payload.data.data;
+        const { data } = action.payload.data;
+        const { access_token, refresh_token} = action.payload.data.data;
         state.isLoading = false;
-        state.data.access_token = action.payload.data.data.access_token;
-        setAccessTokenCookie(action.payload.data.data.access_token, 1);
-        setRefreshTokenToCookie(action.payload.data.data.refresh_token);
-        state.data.user = action.payload.data.data.user as IUser;
+ 
+        setAccessTokenCookie(access_token, 1);
+        setRefreshTokenToCookie(refresh_token);
+        state.data = data;
       })
       .addCase(loginAsync.rejected, (state, action) => {
         state.isLoading = false;
@@ -91,10 +92,10 @@ const loginSlice = createSlice({
       })
       .addCase(refreshAccessTokenAsync.fulfilled, (state, action) => {
         const { access_token, refresh_token } = action.payload.data.data;
-        setAccessTokenCookie(action.payload.data.data.access_token, 1);
-        setRefreshTokenToCookie(action.payload.data.data.refresh_token);
-        state.data.access_token = action.payload.data.data.access_token;
-        state.data.refresh_token = action.payload.data.data.refresh_token;
+        setAccessTokenCookie(access_token, 1);
+        setRefreshTokenToCookie(refresh_token);
+        state.data.access_token = access_token;
+        state.data.refresh_token = refresh_token;
       })
       .addCase(refreshAccessTokenAsync.rejected, (state, action) => {
         state.message = action.error.message as string;

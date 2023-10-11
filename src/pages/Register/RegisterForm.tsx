@@ -19,6 +19,7 @@ import {
 import { useLoading } from "../../hook/Loading";
 import FormControl from '../../components/Common/FormControl';
 
+
 interface FormState {
   email: string;
   password: string;
@@ -26,7 +27,6 @@ interface FormState {
 }
 const RegisterValidate = validate.pick(["email", "password", "full_name"]);
 export default function Register() {
-  
   const { showLoading, hideLoading, isLoading } = useLoading();
   const { isLoading: isLoadingState, isSuccess } = useSelector(
     (state: RootState) => state.register
@@ -38,11 +38,11 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormState>({
-    defaultValues: {
-      email: "",
-      password: "",
-      full_name: "",
-    },
+    // defaultValues: {
+    //   email: "",
+    //   password: "",
+    //   full_name: "",
+    // },
     resolver: yupResolver(RegisterValidate),
   });
   const dispatch = useDispatch<AppDispatch>();
@@ -54,7 +54,7 @@ export default function Register() {
   useEffect(() => {
     isLoadingState ? showLoading() : hideLoading();
     if (isSuccess) {
-      navigate("/");
+      navigate("/login");
       dispatch(setSuccessRegister());
     }
   }, [isLoadingState, showLoading, hideLoading, isSuccess, navigate, dispatch]);
@@ -70,7 +70,7 @@ export default function Register() {
         >
           <div className="title-register">{t("Register")}</div>
 
-          <FormControl  name="full_name">
+          <FormControl errors={errors.full_name}  name="full_name">
           <InputControl
             placeholder="Fullname"
             name="full_name"
