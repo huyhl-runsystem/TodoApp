@@ -1,0 +1,13 @@
+.danger-button {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    color: #fff;
+  }
+  
+  .danger-button:hover,
+  .danger-button:active,
+  .danger-button:focus {
+    background-color: #d9363e;
+    border-color: #d9363e;
+    color: #fff;
+  }

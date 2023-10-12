@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactNode, useState } from 'react';
 import { InfoCircleOutlined, FormOutlined, SnippetsOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
@@ -10,6 +10,7 @@ import { clearAccessToken } from "../../store/LoginReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from '../../store/store';
 import { Button } from "antd";
+import CreateTodoForm from '../TaskPage/CreateTodo';
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -30,6 +31,9 @@ function getItem(
 }
 
 export default function SideBar({children}:{children:ReactNode}) {
+
+  const [showCreateTodoForm, setShowCreateTodoForm] = useState(false);
+
   const items: MenuItem[] = [
     getItem("Todo", "drop_list", <SnippetsOutlined  />, [
       getItem("Create Todo", "create_todo"),
@@ -37,7 +41,12 @@ export default function SideBar({children}:{children:ReactNode}) {
     ]),
   ];
 
-  const handleMenuClick = (e: string) => {
+  const handleMenuClick = (key: string) => {
+    if (key === "create_todo") {
+      setShowCreateTodoForm(true);
+    } else {
+      setShowCreateTodoForm(false);
+    }
   };
 
   const navigate = useNavigate();
@@ -65,8 +74,8 @@ export default function SideBar({children}:{children:ReactNode}) {
       <Layout>
         <Header className="header-sidebar">App Todo</Header>
         <Content className="content-sidebar">
-          {children}
-          </Content>
+          {showCreateTodoForm ? <CreateTodoForm /> : children}
+        </Content>
         <Footer className='footer-sidebar' style={{ textAlign: "center" }}>
           App Todo created by LeHuy
         </Footer>

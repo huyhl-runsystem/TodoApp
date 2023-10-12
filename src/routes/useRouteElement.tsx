@@ -5,7 +5,7 @@ import { path } from "../api/routes";
 
 import RegisterForm from "../pages/Register/RegisterForm";
 import Home from "../pages/Common/Home";
-import TodoList from "../pages/TaskPage/Todo";
+import TodoList from "../pages/TaskPage/TodoList";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 
