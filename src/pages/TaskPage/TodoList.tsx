@@ -22,7 +22,7 @@ const TodoList: React.FC = () => {
 
   useEffect(() => {
     if (access_token) {
-        dispatch(viewAllTodoAsync({ accessToken : access_token, _id: _id }));
+        dispatch(viewAllTodoAsync({ accessToken : access_token, user_id : _id }));
       }
     }, [dispatch]);
 
@@ -41,12 +41,15 @@ const TodoList: React.FC = () => {
           <div className="todo-page">
             <SideBar>
             <div>
-              <h2>Todo List</h2>
-              {data.to_dos.map((todo) => (
-                <div key={todo._id}>
-                  <TodoForm todo={todo} />
-                </div>
-              ))}
+              {data.to_dos ? (
+                data.to_dos.map((todo) => (
+                  <div key={todo._id}>
+                    <TodoForm todo={todo} />
+                  </div>
+                ))
+              ) : (
+                <div>No todos available</div>
+              )}
             </div>
             </SideBar>
           </div>

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { useDispatch } from "react-redux";
 import { createTodoAsync } from "../../store/TodoReducer";
 import { AppDispatch, RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import FormControl from "../../components/Common/FormControl";
+import { ITodo } from "../../interfaces/ITodo";
 
-const CreateTodoForm: React.FC = () => {
+interface TodoFormProps {
+  todo: ITodo;
+} 
+
+const CreateTodoForm : React.FC<TodoFormProps> = ({ todo}) => {
     const [form] = Form.useForm();
     const [showForm, setShowForm] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
@@ -19,10 +24,28 @@ const CreateTodoForm: React.FC = () => {
 
     const onFinish = (values: any) => {
       const { title, desc, status } = values;
-      dispatch(createTodoAsync({ accessToken: access_token, id_user : _id, title, desc, status }));
-      setShowForm(false);
+        dispatch(
+        createTodoAsync({
+          accessToken: access_token,
+          user_id: _id,
+          title,
+          desc,
+          status : Number(status),
+        })
+        );
+        form.resetFields();
+        message.success("Todo added successfully!");
+        setShowForm(true);
     };
   
+        const handleCancel = () => {
+          form.setFieldsValue({
+            title: "",
+            desc: "",
+          });
+          setShowForm(true);
+        };
+
     if (!showForm) {
       return null;
     }
@@ -34,7 +57,7 @@ const CreateTodoForm: React.FC = () => {
         initialValues={{
           title: "",
           desc: "",
-          status: 1, // Set the default status if needed
+          status:todo.status ,
         }}
       >
         <FormControl name="title">
@@ -46,9 +69,9 @@ const CreateTodoForm: React.FC = () => {
   
         <FormControl name="status">
           <select>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
+            <option value={1}>Pending</option>
+            <option value={2}>Doing</option>
+            <option value={3}>Completed</option>
           </select>
         </FormControl>
   
@@ -57,14 +80,7 @@ const CreateTodoForm: React.FC = () => {
             Submit
           </Button>
   
-          {/* You might want to add a button to cancel or hide the form */}
-          <Button
-            htmlType="button"
-            onClick={() => {
-              setShowForm(false);
-              form.resetFields();
-            }}
-          >
+          <Button htmlType="button" onClick={handleCancel}>
             Cancel
           </Button>
         </Form.Item>

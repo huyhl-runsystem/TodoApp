@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from '../../store/store';
 import { Button } from "antd";
 import CreateTodoForm from '../TaskPage/CreateTodo';
+import { ITodo } from '../../interfaces/ITodo';
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -30,7 +31,26 @@ function getItem(
   } as MenuItem;
 }
 
-export default function SideBar({children}:{children:ReactNode}) {
+interface TodoFormProps {
+  todo?: ITodo;
+}
+
+const todo : ITodo = {
+     _id: '',
+    title: '',
+    desc: '',
+    status: 1,
+    user_id: '',
+    createdAt: '',
+    updatedAt: '',
+    __v: 0,
+}
+
+interface SideBarProps {
+  children: React.ReactNode;
+}
+
+export const SideBar: React.FC<SideBarProps> = ({ children }) => {
 
   const [showCreateTodoForm, setShowCreateTodoForm] = useState(false);
 
@@ -74,7 +94,7 @@ export default function SideBar({children}:{children:ReactNode}) {
       <Layout>
         <Header className="header-sidebar">App Todo</Header>
         <Content className="content-sidebar">
-          {showCreateTodoForm ? <CreateTodoForm /> : children}
+          {showCreateTodoForm ? <CreateTodoForm todo={todo} /> : children}
         </Content>
         <Footer className='footer-sidebar' style={{ textAlign: "center" }}>
           App Todo created by LeHuy
@@ -84,3 +104,5 @@ export default function SideBar({children}:{children:ReactNode}) {
     </Layout>
   );
 }
+
+export default SideBar;

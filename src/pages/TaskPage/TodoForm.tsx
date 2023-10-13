@@ -11,7 +11,7 @@ interface TodoFormProps {
   todo: ITodo;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ todo}) => {
+const TodoForm : React.FC<TodoFormProps> = ({ todo}) => {
     const [showForm, setShowForm] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
 

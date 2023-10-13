@@ -35,12 +35,12 @@ const initialState : IStateTodo = {
 
 export const viewAllTodoAsync = createAsyncThunk<
   AxiosResponse<ITodoResponse>,
-  { accessToken: string; _id: string }
+  { accessToken: string; user_id : string }
 >("todo/viewAllTodo", 
-  async ({ accessToken, _id }, { rejectWithValue }) => {
+  async ({ accessToken, user_id }, { rejectWithValue }) => {
   try {
     const response: AxiosResponse<ITodoResponse> = await axiosInstance.get(
-      `/todo/list/${_id}`,
+      `/todo/list/${user_id}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -55,17 +55,17 @@ export const viewAllTodoAsync = createAsyncThunk<
 export const createTodoAsync = createAsyncThunk<
   AxiosResponse<ITodoResponse>,
   { accessToken: string;
-    id_user: string; 
+    user_id : string; 
     title: string; 
     desc: string; 
     status: number }
 >("todo/createTodo",
-  async ({ accessToken, id_user , title, desc, status }, { rejectWithValue, dispatch }) => {
+  async ({ accessToken, user_id , title, desc, status }, { rejectWithValue, dispatch }) => {
     try {
       const response: AxiosResponse<ITodoResponse> = await axiosInstance.post(
         "/todo",
         {
-          id_user,
+          user_id,
           title,
           desc,
           status,
@@ -76,7 +76,7 @@ export const createTodoAsync = createAsyncThunk<
           },
         }
       );
-      dispatch(viewAllTodoAsync({ accessToken, _id : id_user }));
+      dispatch(viewAllTodoAsync({ accessToken, user_id  }));
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -123,6 +123,21 @@ const todoSlice = createSlice({
           state.data = data;
         })
         .addCase(viewAllTodoAsync.rejected, (state) => {
+          state.isLoading = false;
+          state.success = false;
+        })
+        .addCase(createTodoAsync.pending, (state) => {
+          state.isLoading = true;
+          state.success = false; 
+          state.status = 0;
+        })
+        .addCase(createTodoAsync.fulfilled, (state, action) => {
+          const { data } = action.payload.data;
+          state.isLoading = false;
+          state.success = true;
+          state.data = data;
+        })
+        .addCase(createTodoAsync.rejected, (state) => {
           state.isLoading = false;
           state.success = false;
         });
