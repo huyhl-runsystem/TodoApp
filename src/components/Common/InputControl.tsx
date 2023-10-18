@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import { IInputControl } from "../../interfaces/IInputControl";
 import { Form, Input } from "antd";
 
-const InputController:React.FC<IInputControl> = ({
+const InputController: React.FC<IInputControl> = ({
   name,
   control,
   placeholder,
@@ -12,13 +12,13 @@ const InputController:React.FC<IInputControl> = ({
   onBlur,
 }) => {
   return (
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <Input  type={type} placeholder={placeholder} {...field} />
-        )}
-      />
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <Input type={type} placeholder={placeholder} {...field} />
+      )}
+    />
   );
 };
 

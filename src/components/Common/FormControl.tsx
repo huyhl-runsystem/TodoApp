@@ -1,15 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Form } from "antd";
 import { IFormControl } from "../../interfaces/IFormControl";
 
-const FormControl:React.FC<IFormControl> = ({
-  name,
-  errors,
-  children
-}) => {
+const FormControl: React.FC<IFormControl> = ({ name, errors, children }) => {
   return (
     <Form.Item
-      name={name ?? ''}
+      name={name ?? ""}
       hasFeedback
       validateStatus={errors ? "error" : ""}
       help={errors?.message}
@@ -17,6 +13,6 @@ const FormControl:React.FC<IFormControl> = ({
       {children}
     </Form.Item>
   );
-}
+};
 
-export default FormControl
+export default FormControl;

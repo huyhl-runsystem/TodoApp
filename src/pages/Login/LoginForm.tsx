@@ -1,4 +1,4 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect } from "react";
 import "../../style/LoginForm.css";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,14 +13,16 @@ import { useTranslation } from "react-i18next";
 import FormControl from "../../components/Common/FormControl";
 import { IUserLogin } from "../../interfaces/IUserLogin";
 import InputController from "../../components/Common/InputControl";
-import { useLoading } from '../../hook/Loading';
-import { useSelector } from 'react-redux';
-
+import { useLoading } from "../../hook/Loading";
+import { useSelector } from "react-redux";
 
 const loginValidate = validate.pick(["email", "password"]);
 export default function Login() {
   const { t } = useTranslation();
-  const { control, handleSubmit, formState: { errors },
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(loginValidate),
   });
@@ -28,7 +30,7 @@ export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
   const onSubmit: SubmitHandler<IUserLogin> = async (data: IUserLogin) => {
     if (data) {
-      alert("Logined in successfully")
+      alert("Logined in successfully");
       dispatch(loginAsync(data));
     }
   };
@@ -43,47 +45,56 @@ export default function Login() {
 
   return (
     <div className="container">
-      <Form id="login" 
-      onFinish={handleSubmit(onSubmit)} 
-      className="login-form">
-        <div className="title-login">{t("Sign In")}</div>
-        
-        <FormControl errors={errors.email} name="email">
-          <InputController
+      <div className="image-form-container">
+        <div className="image-container">
+          <img
+            src="https://glints.com/vn/blog/wp-content/uploads/2022/09/to-do-list-ma%CC%82%CC%83u.jpeg"
+            alt="Background"
+          />
+        </div>
+        <Form
+          id="login"
+          onFinish={handleSubmit(onSubmit)}
+          className="login-form"
+        >
+          <div className="title-login">{t("Sign In")}</div>
+
+          <FormControl errors={errors.email} name="email">
+            <InputController
               name="email"
               control={control}
               placeholder="Email"
               type="text"
-          />
-        </FormControl>
+            />
+          </FormControl>
 
-        <FormControl errors={errors.password} name="password"> 
-          <InputController
+          <FormControl errors={errors.password} name="password">
+            <InputController
               name="password"
               control={control}
               placeholder="Password"
               type="password"
-          />
-        </FormControl>
-        <Form.Item>
-          <Button
-            id="login"
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            {t("Login")}
-          </Button>
-        </Form.Item>
+            />
+          </FormControl>
+          <Form.Item>
+            <Button
+              id="login"
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              {t("Login")}
+            </Button>
+          </Form.Item>
 
-        <div className="create-account">
-          {t("Do not have an account?")}
-          <Link to={path.registerPath} className="create-account-link">
-          {t(" Create new account")}
-          </Link>
-        </div>
-      </Form>
+          <div className="create-account">
+            {t("Do not have an account?")}
+            <Link to={path.registerPath} className="create-account-link">
+              {t(" Create new account")}
+            </Link>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 }
-

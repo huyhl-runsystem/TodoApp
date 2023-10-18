@@ -1,80 +1,97 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Button, Modal, Input } from "antd";
 import { ITodo } from "../../interfaces/ITodo";
-import FormControl from "../../components/Common/FormControl";
 import "../../style/TodoForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTodoAsync, viewAllTodoAsync } from "../../store/TodoReducer";
+import {
+  deleteTodoAsync,
+  editTodoAsync,
+  viewAllTodoAsync,
+} from "../../store/TodoReducer";
 import { AppDispatch, RootState } from "../../store/store";
+import { useForm } from "react-hook-form";
+import EditTodoForm from "./EditTodo";
 
 interface TodoFormProps {
   todo: ITodo;
 }
 
-const TodoForm : React.FC<TodoFormProps> = ({ todo}) => {
-    const [showForm, setShowForm] = useState(true);
-    const dispatch = useDispatch<AppDispatch>();
+interface FormState {
+  title: string;
+  desc: string;
+  status: number;
+}
 
-  const onFinish = (values: any) => {
-    console.log("Received values:", values);
+const TodoForm: React.FC<TodoFormProps> = ({ todo }) => {
+  const [showEditModal, setShowEditModal] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { _id } = useSelector((state: RootState) => state.login.data.user);
+  const { access_token } = useSelector((state: RootState) => state.login.data);
+
+  const { control, handleSubmit, formState } = useForm<FormState>({
+    defaultValues: {
+      title: todo.title,
+      desc: todo.desc,
+      status: todo.status,
+    },
+  });
+
+  const handleEdit = () => {
+    setShowEditModal(true);
   };
-  
-  const { access_token  } = useSelector(
-    (state: RootState) => state.login.data  );
 
   const handleDelete = () => {
-    dispatch(deleteTodoAsync({ accessToken : access_token , todoId : todo._id}));
-    setShowForm(false);
+    dispatch(deleteTodoAsync({ accessToken: access_token, todoId: todo._id }));
   };
 
-  useEffect(() => {
-    if(!showForm ){
-        dispatch(deleteTodoAsync({accessToken: access_token, todoId: todo._id}));
-    }
-  }, [showForm, dispatch, todo._id]);
-    if(!showForm){
-        return null;
-    }
-  
-  
+  const onFinish = (values: FormState) => {
+    const { title, desc, status } = values;
+    dispatch(
+      editTodoAsync({
+        accessToken: access_token,
+        user_id: _id,
+        todoId: todo._id,
+        title,
+        desc,
+        status,
+      })
+    );
+  };
+
   return (
-    <Form
-      name={`todo-form-${todo._id}`}
-      onFinish={onFinish}
-      initialValues={{
-        title: todo.title,
-        desc: todo.desc,
-        status: todo.status,
-      }}
-    >
-      <FormControl name="title" >
-        <Input  />
-      </FormControl>
-      <FormControl name="desc" >
-        <Input.TextArea  />
-      </FormControl>
-      
-      <FormControl name="status">
-        {/* <select value={todo.status} onChange={handleChange}> */}
-        <select value={todo.status}>
-        <option value={1}>Pending</option>
-        <option value={2}>Doing</option>
-        <option value={3}>Completed</option>
-      </select>
-      </FormControl>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" style={{ marginRight: "10px" }}>
-          Submit
+    <Form.Item>
+      <div>
+        <p>Title: {todo.title}</p>
+        <p>Description: {todo.desc}</p>
+        <p>Status : {todo.status}</p>
+
+        <Button
+          type="primary"
+          onClick={handleEdit}
+          style={{ marginRight: "10px" }}
+        >
+          Edit
         </Button>
 
-        <Button className="danger-button" htmlType="submit"  onClick={handleDelete}>
+        <Button
+          className="danger-button"
+          onClick={handleDelete}
+          style={{ marginRight: "10px" }}
+        >
           Delete
         </Button>
-      </Form.Item>
-    </Form>
+      </div>
+
+      <Modal
+        title="Edit Todo"
+        visible={showEditModal}
+        onCancel={() => setShowEditModal(false)}
+        footer={null}
+      >
+        <EditTodoForm todoId={todo._id} />
+      </Modal>
+    </Form.Item>
   );
 };
 
 export default TodoForm;
-
-

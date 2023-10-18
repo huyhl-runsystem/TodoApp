@@ -6,5 +6,5 @@ import { path } from "../api/routes";
 export default function PublicRoute() {
   const accessToken = getFromCookie("access_token");
   const isPublic = Boolean(!accessToken);
-  return isPublic ?  <Outlet /> : <Navigate to={path.todoListPath} />;
+  return isPublic ? <Outlet /> : <Navigate to={path.todoListPath} />;
 }

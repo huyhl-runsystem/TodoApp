@@ -1,8 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  IResgitserResponse,
-  IUserRegister,
-} from "../interfaces/IUserRegister";
+import { IResgitserResponse, IUserRegister } from "../interfaces/IUserRegister";
 import { AxiosResponse } from "axios";
 import axiosInstance from "../api/axios";
 
@@ -16,8 +13,8 @@ export const registerAsync = createAsyncThunk<
   IUserRegister
 >("posts/register", async (body: IUserRegister, thunkAPI) => {
   try {
-    const response: AxiosResponse<IResgitserResponse> = 
-        await axiosInstance.post("/users/",body);
+    const response: AxiosResponse<IResgitserResponse> =
+      await axiosInstance.post("/users/", body);
     return response;
   } catch (error: any) {
     alert(error.response.data.message);

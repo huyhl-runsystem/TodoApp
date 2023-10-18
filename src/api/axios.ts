@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-const axiosInstance : AxiosInstance = axios.create({
+const axiosInstance: AxiosInstance = axios.create({
   baseURL: "https://todoapp-uit.vercel.app/api",
   headers: {
     "Content-Type": "application/json",
@@ -8,4 +8,3 @@ const axiosInstance : AxiosInstance = axios.create({
 });
 
 export default axiosInstance;
-

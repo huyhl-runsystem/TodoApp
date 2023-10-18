@@ -6,7 +6,7 @@ export const store = configureStore({
   reducer: {
     login: loginReducer,
     register: registerReducer,
-    todo : todoReducer,
+    todo: todoReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

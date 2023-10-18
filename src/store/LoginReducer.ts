@@ -11,7 +11,6 @@ import { IAuth } from "../interfaces/IAuth";
 import axiosInstance from "../api/axios";
 import { IUserLogin } from "../interfaces/IUserLogin";
 
-
 interface IStateAuth extends IAuth {
   isLoading?: boolean;
 }
@@ -79,7 +78,7 @@ const loginSlice = createSlice({
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         const { data } = action.payload.data;
-        const { access_token, refresh_token} = action.payload.data.data;
+        const { access_token, refresh_token } = action.payload.data.data;
         state.isLoading = false;
         setAccessTokenCookie(access_token, 1);
         setRefreshTokenToCookie(refresh_token);
