@@ -1,0 +1,22 @@
+.edit-todo-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.edit-todo-form .ant-input,
+.edit-todo-form .ant-input-textarea,
+.edit-todo-form select {
+  margin-bottom: 15px;
+}
+
+.edit-todo-form .ant-btn {
+  width: 100%;
+}

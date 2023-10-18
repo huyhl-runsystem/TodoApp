@@ -1,5 +1,5 @@
-import React  from 'react';
-import "../../style/RegisterForm.css"
+import React from "react";
+import "../../style/RegisterForm.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Form } from "antd";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,13 +12,9 @@ import InputControl from "../../components/Common/InputControl";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { IUserRegister } from "../../interfaces/IUserRegister";
-import {
-  registerAsync,
-  setSuccessRegister,
-} from "../../store/RegisterReducer";
+import { registerAsync, setSuccessRegister } from "../../store/RegisterReducer";
 import { useLoading } from "../../hook/Loading";
-import FormControl from '../../components/Common/FormControl';
-
+import FormControl from "../../components/Common/FormControl";
 
 interface FormState {
   email: string;
@@ -40,6 +36,7 @@ export default function Register() {
   } = useForm<FormState>({
     resolver: yupResolver(RegisterValidate),
   });
+
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<IUserRegister> = async (data) => {
@@ -65,32 +62,32 @@ export default function Register() {
         >
           <div className="title-register">{t("Register")}</div>
 
-          <FormControl errors={errors.full_name}  name="full_name">
-          <InputControl
-            placeholder="Fullname"
-            name="full_name"
-            control={control}
-            errors={errors.full_name}
-          />
+          <FormControl errors={errors.full_name} name="full_name">
+            <InputControl
+              placeholder="Fullname"
+              name="full_name"
+              control={control}
+              errors={errors.full_name}
+            />
           </FormControl>
-          
+
           <FormControl errors={errors.email} name="email">
-          <InputControl
-            placeholder="Email"
-            name="email"
-            control={control}
-            errors={errors.email}
-          />
+            <InputControl
+              placeholder="Email"
+              name="email"
+              control={control}
+              errors={errors.email}
+            />
           </FormControl>
 
           <FormControl errors={errors.password} name="password">
-          <InputControl
-            placeholder="Password"
-            name="password"
-            control={control}
-            errors={errors.password}
-            type="password"
-          />
+            <InputControl
+              placeholder="Password"
+              name="password"
+              control={control}
+              errors={errors.password}
+              type="password"
+            />
           </FormControl>
 
           <Form.Item>
@@ -105,16 +102,9 @@ export default function Register() {
           </Form.Item>
 
           <Form.Item>
-            <Button
-              form={$id}
-              htmlType="submit"
-              type="primary"
-              className="back-to-login-page"
-            >
-              <Link to={path.loginPath} className="back-to-login-page">
+            <Link to={path.loginPath} className="back-to-login-page">
               {t("Back to login page")}
-              </Link>
-            </Button>
+            </Link>
           </Form.Item>
         </Form>
       )}

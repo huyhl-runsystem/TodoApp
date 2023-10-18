@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from "react";
 import "../../style/LanguageSwitch.css";
 import { useTranslation } from "react-i18next";
 import { Select } from "antd";

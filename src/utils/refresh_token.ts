@@ -2,11 +2,17 @@ export const LocalStorageEventTarget = new EventTarget();
 
 const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
-const setCookie = (name : string , value : string , expires : Date, path = "/login", domain = "") => {
+const setCookie = (
+  name: string,
+  value: string,
+  expires: Date,
+  path = "/login",
+  domain = ""
+) => {
   document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=${path}; domain=${domain}`;
 };
 
-const getCookieValue = (name : string) => {
+const getCookieValue = (name: string) => {
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookieArray = decodedCookie.split(";");
 
@@ -20,11 +26,13 @@ const getCookieValue = (name : string) => {
 };
 
 export const setAccessTokenCookie = (
-    accessToken :string, 
-    expirationDays : number
-    ) => {
+  accessToken: string,
+  expirationDays: number
+) => {
   const expirationDate = new Date();
-  expirationDate.setTime(expirationDate.getTime() + expirationDays * ONE_DAY_IN_SECONDS * 1000);
+  expirationDate.setTime(
+    expirationDate.getTime() + expirationDays * ONE_DAY_IN_SECONDS * 1000
+  );
   setCookie("access_token", accessToken, expirationDate);
 };
 
@@ -55,7 +63,7 @@ export const getAccessTokenFromCookie = () => {
   return getCookieValue("access_token");
 };
 
-export const setRefreshTokenToCookie = (refreshToken : string) => {
+export const setRefreshTokenToCookie = (refreshToken: string) => {
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
   setCookie("refresh_token", refreshToken, expirationDate);
